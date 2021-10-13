@@ -92,7 +92,10 @@ public class CustomerProf {
         VehicleInfo mock_vehicle1 = new VehicleInfo("Toyota", "2021", "Hatchback", "FWD");
         VehicleInfo mock_vehicle2 = new VehicleInfo("Ford", "2021", "Hatchback", "FWD");
         CustomerProf mock_Customer = new CustomerProf("007", "James", "Bond", "2075 Hillside Rd, Storrs, CT 06269", "8675309", (float)10000, "Status", "Use", mock_vehicle);
+
+        System.out.println(mock_Customer.getVehicleInfo().getModel());
         mock_Customer.updateVehicleInfo(mock_vehicle1);
         System.out.print(mock_Customer.getVehicleInfo().getModel());
+
     }
 }
