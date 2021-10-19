@@ -1,11 +1,17 @@
 package com;
+import java.io.File;
 import java.util.ArrayList;
 
 public class CustomerProfDB {
-    private int numCustomer;
-    private int currentCustomerIndex;
+    private int numCustomer = 0;
+    private int currentCustomerIndex = 0;
     private String fileName;
     ArrayList<CustomerProf> customerList = new ArrayList<>();
+
+    CustomerProfDB(String file){
+        fileName = file;
+        initializeDatabase(fileName);
+    }
 
     public void insertNewProfile(CustomerProf customer){
         customerList.add(customer);
@@ -36,21 +42,22 @@ public class CustomerProfDB {
     }
 
     public CustomerProf findFirstProfile(){
-        //TODO
-        return null;
+        return customerList.get(0);
     }
 
     public CustomerProf findNextProfile(){
-        //TODO
-        return null;
+        currentCustomerIndex++;
+        return customerList.get(currentCustomerIndex);
     }
 
     public void writeAllCustomerProf(){
-        //TODO
+        for (CustomerProf customer : customerList){
+            System.out.println(customer);
+        }
     }
 
     public void initializeDatabase(String file){
-        //TODO
+        File newFile = new File(file);
     }
 
     private void print_list(){ //For Testing Purposes
@@ -68,7 +75,8 @@ public class CustomerProfDB {
         CustomerProf customer_1 = new CustomerProf("007", "James", "Bond", "2075 Hillside Rd, Storrs, CT 06269", "8675309", (float)10000, "Status", "Use", vehicle_1);
         CustomerProf customer_2 = new CustomerProf("001", "Dennis", "Cawley", "123 Sesame Street", "1234567890", (float)10000, "Status_1", "Use_1", vehicle_2);
 
-        CustomerProfDB list = new CustomerProfDB();
+        String file =  "";
+        CustomerProfDB list = new CustomerProfDB(file);
         list.insertNewProfile(customer_1);
         list.insertNewProfile(customer_2);
         list.insertNewProfile(customer_1);
