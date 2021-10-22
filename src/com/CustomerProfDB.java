@@ -1,6 +1,8 @@
 package com;
 import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class CustomerProfDB {
     private int numCustomer = 0;
@@ -19,7 +21,6 @@ public class CustomerProfDB {
     }
 
     public boolean deleteProfile(String adminID, String lastName){
-        //Will likely need to edited with First & Next Profile methods
         for(CustomerProf customer : customerList)
         {
             if(customer.getadminID().equals(adminID) && customer.getLastName().equals(lastName)){
@@ -41,47 +42,83 @@ public class CustomerProfDB {
         return null;
     }
 
-    public CustomerProf findFirstProfile(){
-        return customerList.get(0);
-    }
-
-    public CustomerProf findNextProfile(){
-        currentCustomerIndex++;
-        return customerList.get(currentCustomerIndex);
-    }
-
-    public void writeAllCustomerProf(){
-        for (CustomerProf customer : customerList){
-            System.out.println(customer);
+    public CustomerProf findFirstProfile() throws Exception {
+        if(numCustomer > 0){
+            return customerList.get(0);
+        }
+        else{
+            throw new Exception("There are no current customers to get.");
         }
     }
 
-    public void initializeDatabase(String file){
-        File newFile = new File(file);
+    public CustomerProf findNextProfile() throws Exception {
+        if(numCustomer > 1 && currentCustomerIndex + 1 < numCustomer){
+            return customerList.get(++currentCustomerIndex);
+        }
+        else{
+            throw new Exception("There are not enough customers to find next profile");
+        }
+
+    }
+
+    public void writeAllCustomerProf(){
+        try {
+            FileWriter write_to_file = new FileWriter(fileName);
+            for (CustomerProf customer : customerList) {
+                String to_write = String.format("%s, %s, %s, %s, %s, %.2f, %s, %s, %s, %s, %s, %s\n",
+                        customer.getadminID(), customer.getFirstName(), customer.getLastName(),
+                        customer.getAddress(), customer.getPhone(), customer.getIncome(),
+                        customer.getStatus(), customer.getUse(), customer.getVehicleInfo().getModel(),
+                        customer.getVehicleInfo().getYear(), customer.getVehicleInfo().getType(),
+                        customer.getVehicleInfo().getMethod());
+                write_to_file.write(to_write);
+            }
+            System.out.println("Successfully wrote to the file.");
+            write_to_file.close();
+        } catch (Exception e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    public void initializeDatabase(String file) {
+        try {
+            File FileObj = new File(file); //Create File Object
+            if (FileObj.createNewFile()) { //Try to create File
+                System.out.println("File created: " + FileObj.getName());
+            } else { //File Already Exists
+                Scanner scanner = new Scanner(new File(file)); //Read File
+                while (scanner.hasNextLine()) { //Read Next Line
+                    String[] line = scanner.nextLine().split(", "); //Split With Comma and Space
+                    VehicleInfo new_vehicle = new VehicleInfo(line[8], line[9], line[10], line[11]); //Create Vehicle
+                    insertNewProfile(new CustomerProf(line[0], line[1], line[2], line[3], line[4], Float.parseFloat(line[5]), line[6], line[7], new_vehicle)); //Insert new customer object
+                }
+            }
+        } catch(Exception e){ //Throw Error if error in file format
+            System.out.println("Error Reading File: Please User Correct format"); //Print to user
+            e.printStackTrace(); //Print StackTrace
+        }
+
     }
 
     private void print_list(){ //For Testing Purposes
-        System.out.println(customerList);
+        System.out.format("Number of Customers: %d\n", numCustomer);
         for(CustomerProf customer : customerList)
         {
             System.out.println(customer.getFirstName());
         }
-        System.out.println(numCustomer);
+
     }
 
-    public static void main(String[] args) {
-        VehicleInfo vehicle_1 = new VehicleInfo("Honda Civic", "2021", "Hatchback", "FWD");
-        VehicleInfo vehicle_2 = new VehicleInfo("Toyota Prius", "2021", "Hatchback", "FWD");
-        CustomerProf customer_1 = new CustomerProf("007", "James", "Bond", "2075 Hillside Rd, Storrs, CT 06269", "8675309", (float)10000, "Status", "Use", vehicle_1);
-        CustomerProf customer_2 = new CustomerProf("001", "Dennis", "Cawley", "123 Sesame Street", "1234567890", (float)10000, "Status_1", "Use_1", vehicle_2);
+    public static void main(String[] args) throws Exception {
+        VehicleInfo mock_vehicle = new VehicleInfo("Honda Civic", "2021", "Hatchback", "FWD");
+        CustomerProf mock_Customer = new CustomerProf("007", "James", "Bond", "2075 Hillside Rd, Storrs, CT 06269", "8675309", (float)10000, "Status", "Use", mock_vehicle);
 
-        String file =  "";
+        String file =  "customer_profiles.txt";
         CustomerProfDB list = new CustomerProfDB(file);
-        list.insertNewProfile(customer_1);
-        list.insertNewProfile(customer_2);
-        list.insertNewProfile(customer_1);
-        list.print_list();
-        list.deleteProfile("007", "Bond");
-        list.print_list();
+        list.insertNewProfile(mock_Customer);
+        //writeAllCustomerProf will overwrite previous, save a copy of testing profiles locallly
+        //list.writeAllCustomerProf();
+        //list.print_list();
     }
 }
