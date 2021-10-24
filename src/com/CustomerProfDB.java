@@ -42,23 +42,23 @@ public class CustomerProfDB {
         return null;
     }
 
-    public CustomerProf findFirstProfile() throws Exception {
+    public CustomerProf findFirstProfile() {
         if(numCustomer > 0){
             return customerList.get(0);
         }
         else{
-            throw new Exception("There are no current customers to get.");
+            return null;
         }
     }
 
-    public CustomerProf findNextProfile() throws Exception {
+    public CustomerProf findNextProfile() {
         if(numCustomer > 1 && currentCustomerIndex + 1 < numCustomer){
             return customerList.get(++currentCustomerIndex);
         }
         else{
-            throw new Exception("There are not enough customers to find next profile");
+            currentCustomerIndex = 0;
+            return null;
         }
-
     }
 
     public void writeAllCustomerProf(){
@@ -110,7 +110,7 @@ public class CustomerProfDB {
 
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         VehicleInfo mock_vehicle = new VehicleInfo("Honda Civic", "2021", "Hatchback", "FWD");
         CustomerProf mock_Customer = new CustomerProf("007", "James", "Bond", "2075 Hillside Rd, Storrs, CT 06269", "8675309", (float)10000, "Status", "Use", mock_vehicle);
 

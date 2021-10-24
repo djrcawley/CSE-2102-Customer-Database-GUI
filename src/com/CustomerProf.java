@@ -83,6 +83,10 @@ public class CustomerProf {
         this.status = userStatus;
     }
 
+    public void updateUse(String intendedUse){
+        this.use = intendedUse;
+    }
+
     public void updateVehicleInfo(VehicleInfo userVehicle){
         this.vehicleInfo = userVehicle;
     }
