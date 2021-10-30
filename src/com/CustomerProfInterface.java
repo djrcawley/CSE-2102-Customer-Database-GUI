@@ -236,7 +236,7 @@ public class CustomerProfInterface {
     }
 
     public static void main(String[] args) {
-        CustomerProfInterface inter = new CustomerProfInterface("test1.txt");
+        CustomerProfInterface inter = new CustomerProfInterface("test_data.txt");
         inter.getUserChoice();
     }
 }

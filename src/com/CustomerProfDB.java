@@ -117,8 +117,5 @@ public class CustomerProfDB {
         String file =  "customer_profiles.txt";
         CustomerProfDB list = new CustomerProfDB(file);
         list.insertNewProfile(mock_Customer);
-        //writeAllCustomerProf will overwrite previous, save a copy of testing profiles locallly
-        //list.writeAllCustomerProf();
-        //list.print_list();
     }
 }
