@@ -1,4 +1,4 @@
-sDFad2mtest_data.txt Maximino, Roberto, 2 SW. 2nd St. South Windsor CT 06074, 561-629-4406, 185493, active, personal, GMC SIERRA 2500 HD, 2003, Truck, Used
+sDFad2m, Maximino, Roberto, 2 SW. 2nd St. South Windsor CT 06074, 561-629-4406, 185493, active, personal, GMC SIERRA 2500 HD, 2003, Truck, Used
 nTin6an, Rosita, Prudencio, 8446 West Brewery Street Anaheim CA 92806, 918-207-4835, 22572, inactive, both, Volvo XC90, 2009, SUV, New
 9Jw9HMc, Macario, Judit, 810 College Circle Oxford MS 38655, 559-864-2650, 275351, active, business, Ford EXPLORER, 2010, SUV, Certified Pre-Owned
 BvfEcMX, Tamara, Aristides, 76 Bowman St. Stevens Point WI 54481, 270-479-5620, 710604, active, business, Bmw M3, 2012, Sedan, New
