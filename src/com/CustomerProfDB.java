@@ -5,79 +5,86 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CustomerProfDB {
-    private int numCustomer = 0;
-    private int currentCustomerIndex = 0;
-    private String fileName;
-    ArrayList<CustomerProf> customerList = new ArrayList<>();
+    private int numCustomer = 0; //Number of Customers
+    private int currentCustomerIndex = 0; //Index of current customer
+    private String fileName; //FileName
+    ArrayList<CustomerProf> customerList = new ArrayList<>(); //Array of customers
 
+    //Database Constructor
     CustomerProfDB(String file){
-        fileName = file;
-        initializeDatabase(fileName);
+        fileName = file; //Set fileName
+        initializeDatabase(fileName); //Initialize local database from file
     }
 
     public void insertNewProfile(CustomerProf customer){
-        customerList.add(customer);
-        numCustomer++;
+        customerList.add(customer); //Add Customer
+        numCustomer++; //Increment
     }
 
     public boolean deleteProfile(String adminID, String lastName){
-        for(CustomerProf customer : customerList)
+        for(CustomerProf customer : customerList) //Loop through array of customers
         {
+            //Match adminID and lastName
             if(customer.getadminID().equals(adminID) && customer.getLastName().equals(lastName)){
-                customerList.remove(customer);
-                numCustomer--;
-                return true;
+                customerList.remove(customer); //Remove from array
+                numCustomer--; //Decrement number of customers
+                return true; //Customer Found; return true
             }
         }
-        return false;
+        return false; //Customer not found
     }
 
     public CustomerProf findProfile(String adminID, String lastName){
-        for(CustomerProf customer : customerList)
+        for(CustomerProf customer : customerList) //Loop through array of customers
         {
+            //Match adminID and lastName
             if(customer.getadminID().equals(adminID) && customer.getLastName().equals(lastName)){
-                return customer;
+                return customer; //Customer Found; Return Profile
             }
         }
+        //Return null if customer not found
         return null;
     }
 
     public CustomerProf findFirstProfile() {
         if(numCustomer > 0){
+            //Get first profile
             return customerList.get(0);
         }
         else{
+            //Return null if array is empty
             return null;
         }
     }
 
     public CustomerProf findNextProfile() {
         if(numCustomer > 1 && currentCustomerIndex + 1 < numCustomer){
-            return customerList.get(++currentCustomerIndex);
+            return customerList.get(++currentCustomerIndex); //Return Next Customer; Increment index
         }
         else{
-            currentCustomerIndex = 0;
-            return null;
+            currentCustomerIndex = 0; //Reset Index
+            return null; //Return Null if there are no more customers
         }
     }
 
     public void writeAllCustomerProf(){
         try {
-            FileWriter write_to_file = new FileWriter(fileName);
-            for (CustomerProf customer : customerList) {
+            FileWriter write_to_file = new FileWriter(fileName); //File object with write permission
+            for (CustomerProf customer : customerList) { //Loop through customers
+                //Format Customer Data
                 String to_write = String.format("%s, %s, %s, %s, %s, %.2f, %s, %s, %s, %s, %s, %s\n",
                         customer.getadminID(), customer.getFirstName(), customer.getLastName(),
                         customer.getAddress(), customer.getPhone(), customer.getIncome(),
                         customer.getStatus(), customer.getUse(), customer.getVehicleInfo().getModel(),
                         customer.getVehicleInfo().getYear(), customer.getVehicleInfo().getType(),
                         customer.getVehicleInfo().getMethod());
-                write_to_file.write(to_write);
+                write_to_file.write(to_write); //Write to file
             }
-            System.out.println("Successfully wrote to the file.");
-            write_to_file.close();
-        } catch (Exception e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+            System.out.println("Successfully wrote to the file."); //Everything Worked Correctly
+            write_to_file.close(); //Close File
+        } catch (Exception e) { //Catch Error
+            System.out.println("An error occurred."); //Print to user
+            e.printStackTrace(); //Print stackTrace
         }
     }
 
@@ -102,10 +109,10 @@ public class CustomerProfDB {
     }
 
     private void print_list(){ //For Testing Purposes
-        System.out.format("Number of Customers: %d\n", numCustomer);
-        for(CustomerProf customer : customerList)
+        System.out.format("Number of Customers: %d\n", numCustomer); //Number of Cusomters
+        for(CustomerProf customer : customerList) //Loop through Array
         {
-            System.out.println(customer.getFirstName());
+            System.out.println(customer.getFirstName()); //Print First Name
         }
 
     }
@@ -117,5 +124,6 @@ public class CustomerProfDB {
         String file =  "customer_profiles.txt";
         CustomerProfDB list = new CustomerProfDB(file);
         list.insertNewProfile(mock_Customer);
+        list.print_list();
     }
 }
