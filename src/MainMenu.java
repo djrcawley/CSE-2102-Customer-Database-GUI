@@ -2,8 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class GUI implements ActionListener {
-    public void mainMenu() {
+public class MainMenu implements ActionListener {
+    ButtonGroup menuOptions = null;
+
+    public MainMenu() {
 
         JFrame mainMenu = new JFrame();
 
@@ -11,7 +13,7 @@ public class GUI implements ActionListener {
         panel.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
         panel.setLayout(new GridLayout(0, 1));
 
-        ButtonGroup menuOptions = new ButtonGroup();
+        menuOptions = new ButtonGroup();
 
         newMenuOption(panel, menuOptions, "Create Profile");
         newMenuOption(panel, menuOptions, "Delete Profile");
@@ -39,12 +41,27 @@ public class GUI implements ActionListener {
 
     // process the button clicks
     public void actionPerformed(ActionEvent e) {
-
+        ButtonModel selectedOption = menuOptions.getSelection();
+        String x = selectedOption.getActionCommand();
+        if(x.equals("Create Profile")){
+            MainMenu gui = new MainMenu();
+        }
+        if(x.equals("Delete Profile")){
+            MainMenu gui = new MainMenu();
+        }
+        if(x.equals("Update Profile")){
+            MainMenu gui = new MainMenu();
+        }
+        if(x.equals("Find/Display Profile")){
+            MainMenu gui = new MainMenu();
+        }
+        if(x.equals("Display All Profiles")){
+            MainMenu gui = new MainMenu();
+        }
     }
 
     // create one Frame
     public static void main(String[] args) {
-        GUI gui = new GUI();
-        gui.mainMenu();
+        MainMenu gui = new MainMenu();
     }
 }
