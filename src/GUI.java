@@ -3,33 +3,24 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class GUI implements ActionListener {
-    boolean command1 = false;
-    boolean command2 = false;
-    boolean command3 = false;
-    boolean command4 = false;
-    boolean command5 = false;
-
     public void mainMenu() {
 
         JFrame mainMenu = new JFrame();
-        JLabel createProf = new JLabel("Create Profile");
-        JLabel deleteProf = new JLabel("Delete Profile");
-        JLabel updateProf = new JLabel("Update Profile");
-        JLabel findProf = new JLabel("Find/Display Profile");
-        JLabel displayAll = new JLabel("Display All Profiles");
-
-        JButton selectButton = new JButton("SELECT");
-        selectButton.addActionListener(this);
 
         JPanel panel = new JPanel();
         panel.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
         panel.setLayout(new GridLayout(0, 1));
 
-        panel.add(createProf);
-        panel.add(deleteProf);
-        panel.add(updateProf);
-        panel.add(findProf);
-        panel.add(displayAll);
+        ButtonGroup menuOptions = new ButtonGroup();
+
+        newMenuOption(panel, menuOptions, "Create Profile");
+        newMenuOption(panel, menuOptions, "Delete Profile");
+        newMenuOption(panel, menuOptions, "Update Profile");
+        newMenuOption(panel, menuOptions, "Find/Display Profile");
+        newMenuOption(panel, menuOptions, "Display All Profiles");
+
+        JButton selectButton = new JButton("SELECT");
+        selectButton.addActionListener(this);
         panel.add(selectButton);
 
         mainMenu.add(panel, BorderLayout.CENTER);
@@ -39,27 +30,16 @@ public class GUI implements ActionListener {
         mainMenu.setVisible(true);
     }
 
+    public void newMenuOption(JPanel panel, ButtonGroup option, String string){
+        JRadioButton newOption = new JRadioButton(string);
+        newOption.setActionCommand(string);
+        panel.add(newOption);
+        option.add(newOption);
+    }
+
     // process the button clicks
     public void actionPerformed(ActionEvent e) {
-        if (command1 == true){
-            //Call createProf GUI
 
-        }
-        if (command2 == true){
-            //Call deleteProf GUI
-        }
-        if (command3 == true){
-            //Call updateProf GUI
-        }
-        if (command4 == true){
-            //Call findProf GUI
-        }
-        if (command5 == true){
-            //Call display GUI
-        }
-        else{
-
-        }
     }
 
     // create one Frame
