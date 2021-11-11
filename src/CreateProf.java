@@ -91,6 +91,5 @@ public class CreateProf implements ActionListener {
         //Write to DB
     }
     public static void main(String[] args){
-        CreateProf createProf = new CreateProf();
     }
 }

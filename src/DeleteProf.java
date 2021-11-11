@@ -42,6 +42,7 @@ public class DeleteProf implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         //Delete profile from the DB
+        SuccessfulDelete gui = new SuccessfulDelete();
     }
 
     public static void main(String[] args){
