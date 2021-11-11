@@ -47,7 +47,7 @@ public class MainMenu implements ActionListener {
             CreateProf gui = new CreateProf();
         }
         if(x.equals("Delete Profile")){
-            MainMenu gui = new MainMenu();
+            DeleteProf gui = new DeleteProf();
         }
         if(x.equals("Update Profile")){
             MainMenu gui = new MainMenu();
