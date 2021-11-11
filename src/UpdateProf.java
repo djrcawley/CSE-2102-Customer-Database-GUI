@@ -38,6 +38,7 @@ public class UpdateProf implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-
+        //Configure
+        MainMenu gui = new MainMenu();
     }
 }

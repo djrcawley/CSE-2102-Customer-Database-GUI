@@ -89,7 +89,7 @@ public class CreateProf implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         //Write to DB
+        MainMenu gui = new MainMenu();
     }
-    public static void main(String[] args){
-    }
+
 }
