@@ -44,7 +44,7 @@ public class MainMenu implements ActionListener {
         ButtonModel selectedOption = menuOptions.getSelection();
         String x = selectedOption.getActionCommand();
         if(x.equals("Create Profile")){
-            MainMenu gui = new MainMenu();
+            CreateProf gui = new CreateProf();
         }
         if(x.equals("Delete Profile")){
             MainMenu gui = new MainMenu();
