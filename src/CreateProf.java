@@ -4,15 +4,28 @@ import java.awt.event.*;
 
 public class CreateProf implements ActionListener {
     JLabel adminID, fName, lName, address, phone, income, use, status, model, year, type, method;
-    JTextField adminIdT, fNameT, lNameT, addressT, phoneT, incomeT, modelT, yearT;
+    CustomerProfDB database;
+    JTextField adminIdT = new JFormattedTextField();
+    JTextField fNameT = new JFormattedTextField();
+    JTextField lNameT = new JFormattedTextField();
+    JTextField addressT = new JFormattedTextField();
+    JTextField phoneT = new JFormattedTextField();
+    JTextField incomeT = new JFormattedTextField();
+    JTextField modelT = new JFormattedTextField();
+    JTextField yearT = new JFormattedTextField();
+
 
     String[] uses = {"Personal", "Business", "Both"};
     String[] statuses = {"Active", "Inactive"};
     String[] types = {"Sedan", "Sport", "SUV", "Truck", "Other"};
     String[] methods = {"New", "Used", "Certified Pre-Owned"};
-    JComboBox<String> useT, statusT, typeT, methodT;
+    JComboBox<String> useT = new JComboBox<>(uses);
+    JComboBox<String> statusT = new JComboBox<>(statuses);
+    JComboBox<String> typeT = new JComboBox<>(types);
+    JComboBox<String> methodT = new JComboBox<>(methods);
 
-    public CreateProf(){
+    public CreateProf(CustomerProfDB data){
+        database = data;
         JFrame createProf = new JFrame();
 
         JPanel panel = new JPanel();
@@ -24,31 +37,19 @@ public class CreateProf implements ActionListener {
 
         //Define all Text Fields
         adminID = new JLabel("Admin ID:");
-        adminIdT = new JFormattedTextField();
         fName = new JLabel("First Name:");
-        fNameT = new JFormattedTextField();
         lName = new JLabel("Last Name:");
-        lNameT = new JFormattedTextField();
         address = new JLabel("Address:");
-        addressT = new JFormattedTextField();
         phone = new JLabel("Phone:");
-        phoneT = new JFormattedTextField();
         income = new JLabel("Income:");
-        incomeT = new JFormattedTextField();
         model = new JLabel("Model:");
-        modelT = new JFormattedTextField();
         year = new JLabel("Year:");
-        yearT = new JFormattedTextField();
 
         //Define all dropdowns
         use = new JLabel("Use:");
-        useT = new JComboBox<String>(uses);
         status = new JLabel("Status:");
-        statusT = new JComboBox<String>(statuses);
         type = new JLabel("Type:");
-        typeT = new JComboBox<String>(types);
         method = new JLabel("Method:");
-        methodT = new JComboBox<String>(methods);
 
         //Submit Button
         JButton submitButton = new JButton("SUBMIT");
@@ -87,9 +88,44 @@ public class CreateProf implements ActionListener {
         createProf.setVisible(true);
     }
 
-    public void actionPerformed(ActionEvent e) {
-        //Write to DB
-        MainMenu gui = new MainMenu();
-    }
+    public void actionPerformed(ActionEvent event) {
+        String admin = adminIdT.getText();
+        String first = fNameT.getText();
+        String last = lNameT.getText();
+        String addressStr = addressT.getText();
+        String phoneStr = phoneT.getText();
+        String incomeStr = incomeT.getText();
+        String useStr = useT.getSelectedItem().toString();
+        String statusStr = statusT.getSelectedItem().toString();
+        String modelStr = modelT.getText();
+        String yearStr = yearT.getText();
+        String typeStr = typeT.getSelectedItem().toString();
+        String methodStr = methodT.getSelectedItem().toString();
 
+        boolean isComplete = false;
+        if(admin.isEmpty() || first.isEmpty() || last.isEmpty() || addressStr.isEmpty() || phoneStr.isEmpty() || incomeStr.isEmpty() || modelStr.isEmpty() || yearStr.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please complete fields.");
+        }
+        else{
+            isComplete = true;
+        }
+
+        float incomeFloat = 0;
+        boolean isFloat = false;
+        try{
+            incomeFloat = Float.parseFloat(incomeStr);
+            isFloat = true;
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Please enter a number.");
+        }
+
+        if(isFloat && isComplete){
+            VehicleInfo newVehicle = new VehicleInfo(modelStr, yearStr, typeStr, methodStr);
+            CustomerProf newCustomer = new CustomerProf(admin, first, last, addressStr, phoneStr, incomeFloat, useStr, statusStr, newVehicle);
+            database.insertNewProfile(newCustomer);
+            database.writeAllCustomerProf();
+            MainMenu gui = new MainMenu();
+        }
+    }
 }

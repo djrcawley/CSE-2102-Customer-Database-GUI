@@ -1,5 +1,3 @@
-package com;
-
 public class VehicleInfo {
     //Private Vehicle Details
     private String model;
