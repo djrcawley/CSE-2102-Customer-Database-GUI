@@ -4,6 +4,7 @@ import java.awt.event.*;
 
 public class MainMenu implements ActionListener {
     ButtonGroup menuOptions = null;
+    CustomerProfDB database = new CustomerProfDB("customer_profiles.txt");
 
     public MainMenu() {
 
@@ -44,7 +45,7 @@ public class MainMenu implements ActionListener {
         ButtonModel selectedOption = menuOptions.getSelection();
         String x = selectedOption.getActionCommand();
         if(x.equals("Create Profile")){
-            CreateProf gui = new CreateProf();
+            CreateProf gui = new CreateProf(database);
         }
         if(x.equals("Delete Profile")){
             DeleteProf gui = new DeleteProf();

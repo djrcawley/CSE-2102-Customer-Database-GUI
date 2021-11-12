@@ -1,5 +1,3 @@
-package com;
-
 public class CustomerProf {
     //Private Cusomter Details
     private String adminID;
