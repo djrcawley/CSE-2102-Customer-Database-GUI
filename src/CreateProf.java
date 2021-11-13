@@ -5,6 +5,7 @@ import java.awt.event.*;
 public class CreateProf implements ActionListener {
     JLabel adminID, fName, lName, address, phone, income, use, status, model, year, type, method;
     CustomerProfDB database;
+    JFrame createProf;
     JTextField adminIdT = new JFormattedTextField();
     JTextField fNameT = new JFormattedTextField();
     JTextField lNameT = new JFormattedTextField();
@@ -26,7 +27,7 @@ public class CreateProf implements ActionListener {
 
     public CreateProf(CustomerProfDB data){
         database = data;
-        JFrame createProf = new JFrame();
+        createProf = new JFrame();
 
         JPanel panel = new JPanel();
         JLabel label = new JLabel("Create Profile");
@@ -95,12 +96,12 @@ public class CreateProf implements ActionListener {
         String addressStr = addressT.getText();
         String phoneStr = phoneT.getText();
         String incomeStr = incomeT.getText();
-        String useStr = useT.getSelectedItem().toString();
-        String statusStr = statusT.getSelectedItem().toString();
+        String useStr = String.valueOf(useT.getSelectedItem());
+        String statusStr = String.valueOf(statusT.getSelectedItem());
         String modelStr = modelT.getText();
         String yearStr = yearT.getText();
-        String typeStr = typeT.getSelectedItem().toString();
-        String methodStr = methodT.getSelectedItem().toString();
+        String typeStr = String.valueOf(typeT.getSelectedItem());
+        String methodStr = String.valueOf(methodT.getSelectedItem());
 
         boolean isComplete = false;
         if(admin.isEmpty() || first.isEmpty() || last.isEmpty() || addressStr.isEmpty() || phoneStr.isEmpty() || incomeStr.isEmpty() || modelStr.isEmpty() || yearStr.isEmpty()){
@@ -125,7 +126,7 @@ public class CreateProf implements ActionListener {
             CustomerProf newCustomer = new CustomerProf(admin, first, last, addressStr, phoneStr, incomeFloat, useStr, statusStr, newVehicle);
             database.insertNewProfile(newCustomer);
             database.writeAllCustomerProf();
-            MainMenu gui = new MainMenu();
+            createProf.dispose(); //Close Window
         }
     }
 }

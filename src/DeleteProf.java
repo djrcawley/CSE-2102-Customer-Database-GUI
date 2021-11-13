@@ -4,10 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class DeleteProf implements ActionListener {
+    CustomerProfDB database;
     JLabel adminID, lName;
-    JTextField adminIDT, lNameT;
+    JTextField adminIDT = new JFormattedTextField();
+    JTextField lNameT = new JFormattedTextField();
 
-    public DeleteProf(){
+    public DeleteProf(CustomerProfDB data){
+        database = data;
         JFrame deleteProf = new JFrame();
 
         JPanel panel = new JPanel();
@@ -19,9 +22,7 @@ public class DeleteProf implements ActionListener {
 
         //Set Text Fields
         adminID = new JLabel("Admin ID:");
-        adminIDT = new JFormattedTextField();
         lName = new JLabel("Last Name:");
-        lNameT = new JFormattedTextField();
 
         //Delete Button
         JButton deleteButton = new JButton("DELETE");
@@ -41,11 +42,20 @@ public class DeleteProf implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        //Delete profile from the DB
-        SuccessfulDelete gui = new SuccessfulDelete();
+        String admin = adminIDT.getText();
+        String last = lNameT.getText();
+        boolean wasDeleted = database.deleteProfile(admin, last);
+        if (wasDeleted){
+            //Delete profile from the DB
+            SuccessfulDelete gui = new SuccessfulDelete();
+            database.writeAllCustomerProf();
+        }
+        else{
+            //User Not Found
+        }
     }
 
     public static void main(String[] args){
-        DeleteProf gui = new DeleteProf();
+        //DeleteProf gui = new DeleteProf();
     }
 }
