@@ -3,22 +3,19 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class UpdateProfFinder implements ActionListener {
-    JLabel adminID, lName, update;
-    JTextField adminIDT, lNameT;
-
-    String[] fields = {"First Name", "Last Name", "Address", "Phone", "Income", "Use", "Status", "Model", "Year", "Type", "Method"};
-    JComboBox<String> updateT;
-
+public class FDProf implements ActionListener {
     CustomerProfDB database;
 
-    public UpdateProfFinder(CustomerProfDB data){
+    JLabel adminID, lName;
+    JFormattedTextField adminIDT, lNameT;
+
+    public FDProf(CustomerProfDB data) {
         database = data;
 
-        JFrame updateProf = new JFrame();
+        JFrame fdProf = new JFrame();
 
         JPanel panel = new JPanel();
-        JLabel label = new JLabel("Update Profile");
+        JLabel label = new JLabel("Find Profile");
         panel.add(label);
 
         panel.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
@@ -30,10 +27,6 @@ public class UpdateProfFinder implements ActionListener {
         lName = new JLabel("Last Name:");
         lNameT = new JFormattedTextField();
 
-        //Set Combo Box
-        update = new JLabel("Update Field");
-        updateT = new JComboBox<String>(fields);
-
         //Find Button
         JButton findButton = new JButton("FIND");
         findButton.addActionListener(this);
@@ -42,26 +35,24 @@ public class UpdateProfFinder implements ActionListener {
         panel.add(adminIDT);
         panel.add(lName);
         panel.add(lNameT);
-        panel.add(update);
-        panel.add(updateT);
         panel.add(findButton);
 
-        updateProf.add(panel, BorderLayout.CENTER);
-        updateProf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        updateProf.setTitle("Update Profile");
-        updateProf.pack();
-        updateProf.setVisible(true);
+        fdProf.add(panel, BorderLayout.CENTER);
+        fdProf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        fdProf.setTitle("Update Profile");
+        fdProf.pack();
+        fdProf.setVisible(true);
     }
 
     public void actionPerformed(ActionEvent e) {
-        //Search DB for Profile
         CustomerProf customer = database.findProfile(adminIDT.getText(), lNameT.getText());
         if(customer == null){
             System.out.println("Invalid Customer");
             MainMenu gui = new MainMenu();
         }
         else {
-            UpdateProf gui = new UpdateProf(customer, (String) updateT.getSelectedItem());
+
         }
     }
 }
+

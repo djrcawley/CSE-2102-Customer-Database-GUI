@@ -51,7 +51,7 @@ public class MainMenu implements ActionListener {
             DeleteProf gui = new DeleteProf(database);
         }
         if(x.equals("Update Profile")){
-            UpdateProfFinder gui = new UpdateProfFinder();
+            UpdateProfFinder gui = new UpdateProfFinder(database);
         }
         if(x.equals("Find/Display Profile")){
             //FDProf gui = new MainMenu();
