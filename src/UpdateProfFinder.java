@@ -62,7 +62,7 @@ public class UpdateProfFinder implements ActionListener {
             MainMenu gui = new MainMenu();
         }
         else {
-            UpdateProf gui = new UpdateProf(customer, (String) updateT.getSelectedItem());
+            UpdateProf gui = new UpdateProf(customer, (String) updateT.getSelectedItem(), database);
         }
         updateProf.dispose();
     }

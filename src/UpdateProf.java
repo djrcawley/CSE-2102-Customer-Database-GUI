@@ -13,7 +13,10 @@ public class UpdateProf implements ActionListener {
 
     JFrame updateProf;
 
-    public UpdateProf(CustomerProf theCustomer, String field){
+    CustomerProfDB database;
+
+    public UpdateProf(CustomerProf theCustomer, String field, CustomerProfDB data){
+        database = data;
         customer = theCustomer;
         updateField = field;
 
@@ -84,6 +87,8 @@ public class UpdateProf implements ActionListener {
         if(updateField.equals("Method")){
             vehicle.updateMethod(fieldT.getText());
         }
+
+        database.writeAllCustomerProf();
 
         MainMenu gui = new MainMenu();
         updateProf.dispose();
