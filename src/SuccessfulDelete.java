@@ -6,8 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SuccessfulDelete implements ActionListener {
+    JFrame successfulDelete;
     public SuccessfulDelete(){
-        JFrame successfulDelete = new JFrame();
+        successfulDelete = new JFrame();
 
         JPanel panel = new JPanel();
         JLabel label = new JLabel("Delete Profile");
@@ -36,5 +37,6 @@ public class SuccessfulDelete implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         MainMenu gui = new MainMenu();
+        successfulDelete.dispose();
     }
 }

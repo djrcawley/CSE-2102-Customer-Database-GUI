@@ -9,10 +9,12 @@ public class FDProf implements ActionListener {
     JLabel adminID, lName;
     JFormattedTextField adminIDT, lNameT;
 
+    JFrame fdProf;
+
     public FDProf(CustomerProfDB data) {
         database = data;
 
-        JFrame fdProf = new JFrame();
+        fdProf = new JFrame();
 
         JPanel panel = new JPanel();
         JLabel label = new JLabel("Find Profile");
@@ -46,12 +48,14 @@ public class FDProf implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         CustomerProf customer = database.findProfile(adminIDT.getText(), lNameT.getText());
-        if(customer == null){
+        if(customer.getadminID() == null){
             System.out.println("Invalid Customer");
             MainMenu gui = new MainMenu();
+            fdProf.dispose();
         }
         else {
-
+            DisplayProf gui = new DisplayProf(customer);
+            fdProf.dispose();
         }
     }
 }

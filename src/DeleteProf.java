@@ -8,10 +8,11 @@ public class DeleteProf implements ActionListener {
     JLabel adminID, lName;
     JTextField adminIDT = new JFormattedTextField();
     JTextField lNameT = new JFormattedTextField();
+    JFrame deleteProf;
 
     public DeleteProf(CustomerProfDB data){
         database = data;
-        JFrame deleteProf = new JFrame();
+        deleteProf = new JFrame();
 
         JPanel panel = new JPanel();
         JLabel label = new JLabel("Delete Profile");
@@ -52,10 +53,10 @@ public class DeleteProf implements ActionListener {
         }
         else{
             //User Not Found
-        }
-    }
+            System.out.println("Profile Not Found");
+            MainMenu gui = new MainMenu();
+            deleteProf.dispose();
 
-    public static void main(String[] args){
-        //DeleteProf gui = new DeleteProf();
+        }
     }
 }

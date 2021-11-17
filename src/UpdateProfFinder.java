@@ -11,11 +11,12 @@ public class UpdateProfFinder implements ActionListener {
     JComboBox<String> updateT;
 
     CustomerProfDB database;
+    JFrame updateProf;
 
     public UpdateProfFinder(CustomerProfDB data){
         database = data;
 
-        JFrame updateProf = new JFrame();
+        updateProf = new JFrame();
 
         JPanel panel = new JPanel();
         JLabel label = new JLabel("Update Profile");
@@ -63,5 +64,6 @@ public class UpdateProfFinder implements ActionListener {
         else {
             UpdateProf gui = new UpdateProf(customer, (String) updateT.getSelectedItem());
         }
+        updateProf.dispose();
     }
 }

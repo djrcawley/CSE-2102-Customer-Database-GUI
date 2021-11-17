@@ -10,11 +10,14 @@ public class UpdateProf implements ActionListener {
 
     CustomerProf customer;
     String updateField;
+
+    JFrame updateProf;
+
     public UpdateProf(CustomerProf theCustomer, String field){
         customer = theCustomer;
         updateField = field;
 
-        JFrame updateProf = new JFrame();
+        updateProf = new JFrame();
 
         JPanel panel = new JPanel();
         JLabel label = new JLabel("Update");
@@ -83,5 +86,6 @@ public class UpdateProf implements ActionListener {
         }
 
         MainMenu gui = new MainMenu();
+        updateProf.dispose();
     }
 }

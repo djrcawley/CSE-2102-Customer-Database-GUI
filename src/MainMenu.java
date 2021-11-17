@@ -5,10 +5,11 @@ import java.awt.event.*;
 public class MainMenu implements ActionListener {
     ButtonGroup menuOptions = null;
     CustomerProfDB database = new CustomerProfDB("customer_profiles.txt");
+    JFrame mainMenu;
 
     public MainMenu() {
 
-        JFrame mainMenu = new JFrame();
+        mainMenu = new JFrame();
 
         JPanel panel = new JPanel();
         panel.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
@@ -46,18 +47,23 @@ public class MainMenu implements ActionListener {
         String x = selectedOption.getActionCommand();
         if(x.equals("Create Profile")){
             CreateProf gui = new CreateProf(database);
+            mainMenu.dispose();
         }
         if(x.equals("Delete Profile")){
             DeleteProf gui = new DeleteProf(database);
+            mainMenu.dispose();
         }
         if(x.equals("Update Profile")){
             UpdateProfFinder gui = new UpdateProfFinder(database);
+            mainMenu.dispose();
         }
         if(x.equals("Find/Display Profile")){
-            //FDProf gui = new MainMenu();
+            FDProf gui = new FDProf(database);
+            mainMenu.dispose();
         }
         if(x.equals("Display All Profiles")){
             MainMenu gui = new MainMenu();
+            mainMenu.dispose();
         }
     }
 
