@@ -126,6 +126,8 @@ public class CreateProf implements ActionListener {
             CustomerProf newCustomer = new CustomerProf(admin, first, last, addressStr, phoneStr, incomeFloat, useStr, statusStr, newVehicle);
             database.insertNewProfile(newCustomer);
             database.writeAllCustomerProf();
+
+            MainMenu gui = new MainMenu();
             createProf.dispose(); //Close Window
         }
     }
