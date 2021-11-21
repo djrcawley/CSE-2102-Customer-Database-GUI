@@ -48,15 +48,14 @@ public class FDProf implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         CustomerProf customer = database.findProfile(adminIDT.getText(), lNameT.getText());
-        if(customer.getadminID() == null){
-            System.out.println("Invalid Customer");
-            MainMenu gui = new MainMenu();
-            fdProf.dispose();
+        if(customer == null){
+            JOptionPane.showMessageDialog(null, "Invalid Customer");
+            new MainMenu();
         }
         else {
-            DisplayProf gui = new DisplayProf(customer);
-            fdProf.dispose();
+            new DisplayProf(customer);
         }
+        fdProf.dispose();
     }
 }
 

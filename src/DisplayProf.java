@@ -93,7 +93,7 @@ public class DisplayProf implements ActionListener{
     }
 
     public void actionPerformed(ActionEvent e) {
-        MainMenu gui = new MainMenu();
+        new MainMenu();
         fdProf.dispose();
     }
 }

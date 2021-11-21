@@ -48,13 +48,13 @@ public class DeleteProf implements ActionListener {
         boolean wasDeleted = database.deleteProfile(admin, last);
         if (wasDeleted){
             //Delete profile from the DB
-            SuccessfulDelete gui = new SuccessfulDelete();
+            new SuccessfulDelete();
             database.writeAllCustomerProf();
         }
         else{
             //User Not Found
-            System.out.println("Profile Not Found");
-            MainMenu gui = new MainMenu();
+            JOptionPane.showMessageDialog(null, "Profile Not Found");
+            new MainMenu();
             deleteProf.dispose();
 
         }

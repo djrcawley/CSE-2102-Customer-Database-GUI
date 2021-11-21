@@ -33,7 +33,7 @@ public class UpdateProfFinder implements ActionListener {
 
         //Set Combo Box
         update = new JLabel("Update Field");
-        updateT = new JComboBox<String>(fields);
+        updateT = new JComboBox<>(fields);
 
         //Find Button
         JButton findButton = new JButton("FIND");
@@ -58,7 +58,7 @@ public class UpdateProfFinder implements ActionListener {
         //Search DB for Profile
         CustomerProf customer = database.findProfile(adminIDT.getText(), lNameT.getText());
         if(customer == null){
-            System.out.println("Invalid Customer");
+            JOptionPane.showMessageDialog(null, "Invalid Customer");
             MainMenu gui = new MainMenu();
         }
         else {

@@ -106,6 +106,7 @@ public class CreateProf implements ActionListener {
         boolean isComplete = false;
         if(admin.isEmpty() || first.isEmpty() || last.isEmpty() || addressStr.isEmpty() || phoneStr.isEmpty() || incomeStr.isEmpty() || modelStr.isEmpty() || yearStr.isEmpty()){
             JOptionPane.showMessageDialog(null, "Please complete fields.");
+            return;
         }
         else{
             isComplete = true;
@@ -119,6 +120,7 @@ public class CreateProf implements ActionListener {
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(null, "Please enter a number.");
+            return;
         }
 
         if(isFloat && isComplete){

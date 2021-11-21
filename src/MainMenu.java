@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class MainMenu implements ActionListener {
-    ButtonGroup menuOptions = null;
+    ButtonGroup menuOptions;
     CustomerProfDB database = new CustomerProfDB("customer_profiles.txt");
     JFrame mainMenu;
 
@@ -44,31 +44,33 @@ public class MainMenu implements ActionListener {
     // process the button clicks
     public void actionPerformed(ActionEvent e) {
         ButtonModel selectedOption = menuOptions.getSelection();
-        String x = selectedOption.getActionCommand();
-        if(x.equals("Create Profile")){
-            CreateProf gui = new CreateProf(database);
-            mainMenu.dispose();
-        }
-        if(x.equals("Delete Profile")){
-            DeleteProf gui = new DeleteProf(database);
-            mainMenu.dispose();
-        }
-        if(x.equals("Update Profile")){
-            UpdateProfFinder gui = new UpdateProfFinder(database);
-            mainMenu.dispose();
-        }
-        if(x.equals("Find/Display Profile")){
-            FDProf gui = new FDProf(database);
-            mainMenu.dispose();
-        }
-        if(x.equals("Display All Profiles")){
-            DisplayAllProf gui = new DisplayAllProf(database);
-            mainMenu.dispose();
+        if (selectedOption != null){
+            String x = selectedOption.getActionCommand();
+            if(x.equals("Create Profile")){
+                new CreateProf(database);
+                mainMenu.dispose();
+            }
+            if(x.equals("Delete Profile")){
+                new DeleteProf(database);
+                mainMenu.dispose();
+            }
+            if(x.equals("Update Profile")){
+                new UpdateProfFinder(database);
+                mainMenu.dispose();
+            }
+            if(x.equals("Find/Display Profile")){
+                new FDProf(database);
+                mainMenu.dispose();
+            }
+            if(x.equals("Display All Profiles")){
+                new DisplayAllProf(database);
+                mainMenu.dispose();
+            }
         }
     }
 
     // create one Frame
     public static void main(String[] args) {
-        MainMenu gui = new MainMenu();
+        new MainMenu();
     }
 }

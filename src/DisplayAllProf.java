@@ -13,39 +13,43 @@ public class DisplayAllProf implements ActionListener {
     int index = 0;
 
     public DisplayAllProf(CustomerProfDB data){
-        displayAll = new JFrame();
         database = data;
         customers = database.customerList;
+        if (customers.size() > 0){
+            displayAll = new JFrame();
+            panel = new JPanel();
+            JLabel label = new JLabel("");
+            JLabel label2 = new JLabel("Customer Profile");
+            panel.add(label);
+            panel.add(label2);
 
-        panel = new JPanel();
-        JLabel label = new JLabel("");
-        JLabel label2 = new JLabel("Customer Profile");
-        panel.add(label);
-        panel.add(label2);
+            panel.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
+            panel.setLayout(new GridLayout(0, 2));
 
-        panel.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
-        panel.setLayout(new GridLayout(0, 2));
+            AddLabels();
 
-        AddLabels();
-
-        displayCustomer(customers.get(index++), panel);
+            displayCustomer(customers.get(index++), panel);
 
 
-        //Find Button
-        JButton closeButton = new JButton("Next");
-        closeButton.addActionListener(this);
+            //Find Button
+            JButton closeButton = new JButton("Next");
+            closeButton.addActionListener(this);
 
-        //Another Filler Label
-        JLabel label3 = new JLabel("");
-        panel.add(label3);
+            //Another Filler Label
+            JLabel label3 = new JLabel("");
+            panel.add(label3);
 
-        panel.add(closeButton);
+            panel.add(closeButton);
 
-        displayAll.add(panel, BorderLayout.CENTER);
-        displayAll.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        displayAll.setTitle("Customer Profile");
-        displayAll.pack();
-        displayAll.setVisible(true);
+            displayAll.add(panel, BorderLayout.CENTER);
+            displayAll.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            displayAll.setTitle("Customer Profile");
+            displayAll.pack();
+            displayAll.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "There are no users to display.");
+            new MainMenu();
+        }
     }
 
     public void displayCustomer(CustomerProf customer, JPanel panel){
@@ -122,7 +126,7 @@ public class DisplayAllProf implements ActionListener {
         if(index < customers.size()){
             displayCustomer(customers.get(index++), panel);
         }else{
-            MainMenu gui = new MainMenu();
+            new MainMenu();
             displayAll.dispose();
         }
     }

@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Objects;
 
 public class UpdateProf implements ActionListener {
     JLabel fieldL;
@@ -90,7 +89,7 @@ public class UpdateProf implements ActionListener {
 
         database.writeAllCustomerProf();
 
-        MainMenu gui = new MainMenu();
+        new MainMenu();
         updateProf.dispose();
     }
 }
