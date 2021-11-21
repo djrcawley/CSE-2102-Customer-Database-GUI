@@ -5,33 +5,39 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class DisplayAllProf implements ActionListener {
+    JLabel adminIDV, fNameV, lNameV, addressV, phoneV, incomeV, useV, statusV, modelV, yearV, typeV, methodV;
     ArrayList<CustomerProf> customers;
+    JPanel panel;
     JFrame displayAll;
     CustomerProfDB database;
+    int index = 0;
 
     public DisplayAllProf(CustomerProfDB data){
         displayAll = new JFrame();
         database = data;
         customers = database.customerList;
 
-        JPanel panel = new JPanel();
-        JLabel label = new JLabel("Customer Profiles");
+        panel = new JPanel();
+        JLabel label = new JLabel("");
+        JLabel label2 = new JLabel("Customer Profile");
         panel.add(label);
+        panel.add(label2);
 
         panel.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
         panel.setLayout(new GridLayout(0, 2));
 
-        for(CustomerProf customer : customers){
-            displayCustomer(customer, panel);
-        }
+        AddLabels();
+
+        displayCustomer(customers.get(index++), panel);
+
 
         //Find Button
-        JButton closeButton = new JButton("CLOSE");
+        JButton closeButton = new JButton("Next");
         closeButton.addActionListener(this);
 
         //Another Filler Label
-        JLabel label2 = new JLabel("");
-        panel.add(label2);
+        JLabel label3 = new JLabel("");
+        panel.add(label3);
 
         panel.add(closeButton);
 
@@ -46,30 +52,45 @@ public class DisplayAllProf implements ActionListener {
         VehicleInfo vehicle = customer.getVehicleInfo();
 
         //Set all Text Fields
+        adminIDV.setText(customer.getadminID());
+        fNameV.setText(customer.getFirstName());
+        lNameV.setText(customer.getLastName());
+        addressV.setText(customer.getAddress());
+        phoneV.setText(customer.getPhone());
+        incomeV.setText(String.valueOf(customer.getIncome()));
+        useV.setText(customer.getUse());
+        statusV.setText(customer.getStatus());
+        modelV.setText(customer.getVehicleInfo().getModel());
+        yearV.setText(customer.getVehicleInfo().getYear());
+        typeV.setText(customer.getVehicleInfo().getType());
+        methodV.setText(customer.getVehicleInfo().getMethod());
+    }
+
+    public void AddLabels(){
         JLabel adminID = new JLabel("Admin ID:");
-        JLabel adminIDV = new JLabel(customer.getadminID());
+        adminIDV = new JLabel();
         JLabel fName = new JLabel("First Name:");
-        JLabel fNameV = new JLabel(customer.getFirstName());
+        fNameV = new JLabel();
         JLabel lName = new JLabel("Last Name:");
-        JLabel lNameV = new JLabel(customer.getLastName());
+        lNameV = new JLabel();
         JLabel address = new JLabel("Address:");
-        JLabel addressV = new JLabel(customer.getAddress());
+        addressV = new JLabel();
         JLabel phone = new JLabel("Phone:");
-        JLabel phoneV = new JLabel(customer.getPhone());
+        phoneV = new JLabel();
         JLabel income = new JLabel("Income:");
-        JLabel incomeV = new JLabel(String.valueOf(customer.getIncome()));
+        incomeV = new JLabel();
         JLabel use = new JLabel("Use:");
-        JLabel useV = new JLabel(customer.getUse());
+        useV = new JLabel();
         JLabel status = new JLabel("Status:");
-        JLabel statusV = new JLabel(customer.getStatus());
+        statusV = new JLabel();
         JLabel model = new JLabel("Model:");
-        JLabel modelV = new JLabel(vehicle.getModel());
+        modelV = new JLabel();
         JLabel year = new JLabel("Year:");
-        JLabel yearV = new JLabel(vehicle.getYear());
+        yearV = new JLabel();
         JLabel type = new JLabel("Type:");
-        JLabel typeV = new JLabel(vehicle.getType());
+        typeV = new JLabel();
         JLabel method = new JLabel("Method:");
-        JLabel methodV = new JLabel(vehicle.getMethod());
+        methodV = new JLabel();
 
         panel.add(adminID);
         panel.add(adminIDV);
@@ -98,7 +119,11 @@ public class DisplayAllProf implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        MainMenu gui = new MainMenu();
-        displayAll.dispose();
+        if(index < customers.size()){
+            displayCustomer(customers.get(index++), panel);
+        }else{
+            MainMenu gui = new MainMenu();
+            displayAll.dispose();
+        }
     }
 }
