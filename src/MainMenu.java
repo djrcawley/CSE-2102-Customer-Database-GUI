@@ -63,7 +63,7 @@ public class MainMenu implements ActionListener {
                 mainMenu.dispose();
             }
             if(x.equals("Display All Profiles")){
-                new DisplayAllProf(database);
+                new DisplayAllGetAdminID(database);
                 mainMenu.dispose();
             }
         }

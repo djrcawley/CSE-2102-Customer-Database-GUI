@@ -10,10 +10,12 @@ public class DisplayAllProf implements ActionListener {
     JPanel panel;
     JFrame displayAll;
     CustomerProfDB database;
+    String adminID;
     int index = 0;
 
-    public DisplayAllProf(CustomerProfDB data){
+    public DisplayAllProf(CustomerProfDB data, String userID){
         database = data;
+        adminID = userID;
         customers = database.customerList;
         if (customers.size() > 0){
             displayAll = new JFrame();
@@ -28,7 +30,15 @@ public class DisplayAllProf implements ActionListener {
 
             AddLabels();
 
-            displayCustomer(customers.get(index++), panel);
+            CustomerProf current  = findProfile();
+            if(current != null){
+                displayCustomer(current, panel);
+            }else{
+                JOptionPane.showMessageDialog(null, "No matching profiles found.");
+                new MainMenu();
+                displayAll.dispose();
+                return;
+            }
 
 
             //Find Button
@@ -122,9 +132,23 @@ public class DisplayAllProf implements ActionListener {
         panel.add(methodV);
     }
 
+    public CustomerProf findProfile(){
+        System.out.print(index);
+        while (index < customers.size() && !customers.get(index).getadminID().equals(adminID)){
+            System.out.print(index);
+            index++;
+        }
+        if(index < customers.size() && customers.get(index).getadminID().equals(adminID)){
+            return customers.get(index++);
+        }else{
+            return null;
+        }
+    }
+
     public void actionPerformed(ActionEvent e) {
-        if(index < customers.size()){
-            displayCustomer(customers.get(index++), panel);
+        CustomerProf profile = findProfile();
+        if (profile != null){
+            displayCustomer(profile, panel);
         }else{
             new MainMenu();
             displayAll.dispose();
