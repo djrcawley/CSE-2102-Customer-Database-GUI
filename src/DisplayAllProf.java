@@ -133,7 +133,6 @@ public class DisplayAllProf implements ActionListener {
     }
 
     public CustomerProf findProfile(){
-        System.out.print(index);
         while (index < customers.size() && !customers.get(index).getadminID().equals(adminID)){
             System.out.print(index);
             index++;
