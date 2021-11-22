@@ -55,8 +55,7 @@ public class DeleteProf implements ActionListener {
             //User Not Found
             JOptionPane.showMessageDialog(null, "Profile Not Found");
             new MainMenu();
-            deleteProf.dispose();
-
         }
+        deleteProf.dispose();
     }
 }

@@ -7,7 +7,7 @@ public class UpdateProfFinder implements ActionListener {
     JLabel adminID, lName, update;
     JTextField adminIDT, lNameT;
 
-    String[] fields = {"First Name", "Last Name", "Address", "Phone", "Income", "Use", "Status", "Model", "Year", "Type", "Method"};
+    String[] fields = {"First Name", "Last Name", "Address", "Phone", "Income", "Status", "Use", "Model", "Year", "Type", "Method"};
     JComboBox<String> updateT;
 
     CustomerProfDB database;

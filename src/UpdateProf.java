@@ -6,13 +6,19 @@ import java.awt.event.ActionListener;
 public class UpdateProf implements ActionListener {
     JLabel fieldL;
     JTextField fieldT;
-
     CustomerProf customer;
     String updateField;
-
     JFrame updateProf;
-
     CustomerProfDB database;
+
+    String[] uses = {"Personal", "Business", "Both"};
+    String[] statuses = {"Active", "Inactive"};
+    String[] types = {"Sedan", "Sport", "SUV", "Truck", "Other"};
+    String[] methods = {"New", "Used", "Certified Pre-Owned"};
+    JComboBox<String> useT = new JComboBox<>(uses);
+    JComboBox<String> statusT = new JComboBox<>(statuses);
+    JComboBox<String> typeT = new JComboBox<>(types);
+    JComboBox<String> methodT = new JComboBox<>(methods);
 
     public UpdateProf(CustomerProf theCustomer, String field, CustomerProfDB data){
         database = data;
@@ -39,7 +45,17 @@ public class UpdateProf implements ActionListener {
         submitButton.addActionListener(this);
 
         panel.add(fieldL);
-        panel.add(fieldT);
+        if (updateField.equals("Use")){
+            panel.add(useT);
+        }else if(updateField.equals("Status")){
+            panel.add(statusT);
+        }else if(updateField.equals("Type")){
+            panel.add(typeT);
+        }else if(updateField.equals("Method")){
+            panel.add(methodT);
+        }else {
+            panel.add(fieldT);
+        }
         panel.add(submitButton);
 
         updateProf.add(panel, BorderLayout.CENTER);
@@ -69,10 +85,10 @@ public class UpdateProf implements ActionListener {
             customer.updateIncome(Integer.parseInt(fieldT.getText()));
         }
         if(updateField.equals("Use")){
-            customer.updateUse(fieldT.getText());
+            customer.updateUse(String.valueOf(useT.getSelectedItem()));
         }
         if(updateField.equals("Status")){
-            customer.updateStatus(fieldT.getText());
+            customer.updateStatus(String.valueOf(statusT.getSelectedItem()));
         }
         if(updateField.equals("Model")){
             vehicle.updateModel(fieldT.getText());
@@ -81,10 +97,10 @@ public class UpdateProf implements ActionListener {
             vehicle.updateYear(fieldT.getText());
         }
         if(updateField.equals("Type")){
-            vehicle.updateType(fieldT.getText());
+            vehicle.updateType(String.valueOf(typeT.getSelectedItem()));
         }
         if(updateField.equals("Method")){
-            vehicle.updateMethod(fieldT.getText());
+            vehicle.updateMethod(String.valueOf(methodT.getSelectedItem()));
         }
 
         database.writeAllCustomerProf();

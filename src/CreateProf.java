@@ -125,7 +125,7 @@ public class CreateProf implements ActionListener {
 
         if(isFloat && isComplete){
             VehicleInfo newVehicle = new VehicleInfo(modelStr, yearStr, typeStr, methodStr);
-            CustomerProf newCustomer = new CustomerProf(admin, first, last, addressStr, phoneStr, incomeFloat, useStr, statusStr, newVehicle);
+            CustomerProf newCustomer = new CustomerProf(admin, first, last, addressStr, phoneStr, incomeFloat, statusStr, useStr, newVehicle);
             database.insertNewProfile(newCustomer);
             database.writeAllCustomerProf();
 
