@@ -36,7 +36,6 @@ public class SuccessfulDelete implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        MainMenu gui = new MainMenu();
         successfulDelete.dispose();
     }
 }

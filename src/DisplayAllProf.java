@@ -35,7 +35,6 @@ public class DisplayAllProf implements ActionListener {
                 displayCustomer(current, panel);
             }else{
                 JOptionPane.showMessageDialog(null, "No matching profiles found.");
-                new MainMenu();
                 displayAll.dispose();
                 return;
             }
@@ -58,7 +57,6 @@ public class DisplayAllProf implements ActionListener {
             displayAll.setVisible(true);
         }else{
             JOptionPane.showMessageDialog(null, "There are no users to display.");
-            new MainMenu();
         }
     }
 
@@ -149,7 +147,6 @@ public class DisplayAllProf implements ActionListener {
         if (profile != null){
             displayCustomer(profile, panel);
         }else{
-            new MainMenu();
             displayAll.dispose();
         }
     }

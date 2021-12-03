@@ -104,8 +104,6 @@ public class UpdateProf implements ActionListener {
         }
 
         database.writeAllCustomerProf();
-
-        new MainMenu();
         updateProf.dispose();
     }
 }

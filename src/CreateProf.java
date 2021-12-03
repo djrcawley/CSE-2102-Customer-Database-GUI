@@ -129,7 +129,7 @@ public class CreateProf implements ActionListener {
             database.insertNewProfile(newCustomer);
             database.writeAllCustomerProf();
 
-            MainMenu gui = new MainMenu();
+            JOptionPane.showMessageDialog(null, "Profile Saved.");
             createProf.dispose(); //Close Window
         }
     }
