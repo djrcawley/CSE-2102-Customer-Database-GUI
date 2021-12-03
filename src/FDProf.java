@@ -50,7 +50,6 @@ public class FDProf implements ActionListener {
         CustomerProf customer = database.findProfile(adminIDT.getText(), lNameT.getText());
         if(customer == null){
             JOptionPane.showMessageDialog(null, "Invalid Customer");
-            new MainMenu();
         }
         else {
             new DisplayProf(customer);

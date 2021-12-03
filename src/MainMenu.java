@@ -1,10 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Scanner;
 
 public class MainMenu implements ActionListener {
     ButtonGroup menuOptions;
-    CustomerProfDB database = new CustomerProfDB("customer_profiles.txt");
+    String fileName = getDatabaseFile();
+    CustomerProfDB database = new CustomerProfDB(fileName);
     JFrame mainMenu;
 
     public MainMenu() {
@@ -34,6 +36,13 @@ public class MainMenu implements ActionListener {
         mainMenu.setVisible(true);
     }
 
+    public String getDatabaseFile(){
+        Scanner in = new Scanner(System.in); //Create Scanner
+        System.out.println("Enter File Name:");
+        String file = in.nextLine(); //Get file
+        return file;
+    }
+
     public void newMenuOption(JPanel panel, ButtonGroup option, String string){
         JRadioButton newOption = new JRadioButton(string);
         newOption.setActionCommand(string);
@@ -48,23 +57,18 @@ public class MainMenu implements ActionListener {
             String x = selectedOption.getActionCommand();
             if(x.equals("Create Profile")){
                 new CreateProf(database);
-                mainMenu.dispose();
             }
             if(x.equals("Delete Profile")){
                 new DeleteProf(database);
-                mainMenu.dispose();
             }
             if(x.equals("Update Profile")){
                 new UpdateProfFinder(database);
-                mainMenu.dispose();
             }
             if(x.equals("Find/Display Profile")){
                 new FDProf(database);
-                mainMenu.dispose();
             }
             if(x.equals("Display All Profiles")){
                 new DisplayAllGetAdminID(database);
-                mainMenu.dispose();
             }
         }
     }

@@ -59,10 +59,9 @@ public class UpdateProfFinder implements ActionListener {
         CustomerProf customer = database.findProfile(adminIDT.getText(), lNameT.getText());
         if(customer == null){
             JOptionPane.showMessageDialog(null, "Invalid Customer");
-            MainMenu gui = new MainMenu();
         }
         else {
-            UpdateProf gui = new UpdateProf(customer, (String) updateT.getSelectedItem(), database);
+            new UpdateProf(customer, (String) updateT.getSelectedItem(), database);
         }
         updateProf.dispose();
     }
