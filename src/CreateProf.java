@@ -122,6 +122,10 @@ public class CreateProf implements ActionListener {
             JOptionPane.showMessageDialog(null, "Please enter a number.");
             return;
         }
+        if (incomeFloat<0){
+            JOptionPane.showMessageDialog(null, "Please enter an income of 0 or greater");
+            return;
+        }
 
         VehicleInfo newVehicle = new VehicleInfo(modelStr, yearStr, typeStr, methodStr); //Create Vehicle
         CustomerProf newCustomer = new CustomerProf(admin, first, last, addressStr, phoneStr, incomeFloat, statusStr, useStr, newVehicle); //Create Customer
