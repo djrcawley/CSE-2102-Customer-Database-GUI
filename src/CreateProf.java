@@ -3,9 +3,11 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class CreateProf implements ActionListener {
+    //Labels
     JLabel adminID, fName, lName, address, phone, income, use, status, model, year, type, method;
-    CustomerProfDB database;
-    JFrame createProf;
+    CustomerProfDB database; //Database
+    JFrame createProf; //Frame
+    //Init TextField
     JTextField adminIdT = new JFormattedTextField();
     JTextField fNameT = new JFormattedTextField();
     JTextField lNameT = new JFormattedTextField();
@@ -15,7 +17,7 @@ public class CreateProf implements ActionListener {
     JTextField modelT = new JFormattedTextField();
     JTextField yearT = new JFormattedTextField();
 
-
+    //Dropdown selection
     String[] uses = {"Personal", "Business", "Both"};
     String[] statuses = {"Active", "Inactive"};
     String[] types = {"Sedan", "Sport", "SUV", "Truck", "Other"};
@@ -26,13 +28,14 @@ public class CreateProf implements ActionListener {
     JComboBox<String> methodT = new JComboBox<>(methods);
 
     public CreateProf(CustomerProfDB data){
-        database = data;
-        createProf = new JFrame();
+        database = data; //database
+        createProf = new JFrame(); //Init Frame
 
+        //Add Panel
         JPanel panel = new JPanel();
         JLabel label = new JLabel("Create Profile");
         panel.add(label);
-
+        //Set border layout
         panel.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
         panel.setLayout(new GridLayout(0, 1));
 
@@ -55,7 +58,7 @@ public class CreateProf implements ActionListener {
         //Submit Button
         JButton submitButton = new JButton("SUBMIT");
         submitButton.addActionListener(this);
-
+        //Add Panels
         panel.add(adminID);
         panel.add(adminIdT);
         panel.add(fName);
@@ -81,7 +84,7 @@ public class CreateProf implements ActionListener {
         panel.add(method);
         panel.add(methodT);
         panel.add(submitButton);
-
+        //Complete Frame
         createProf.add(panel, BorderLayout.CENTER);
         createProf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         createProf.setTitle("Create Profile");
@@ -90,6 +93,7 @@ public class CreateProf implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent event) {
+        //Collect User Response
         String admin = adminIdT.getText();
         String first = fNameT.getText();
         String last = lNameT.getText();
@@ -103,34 +107,30 @@ public class CreateProf implements ActionListener {
         String typeStr = String.valueOf(typeT.getSelectedItem());
         String methodStr = String.valueOf(methodT.getSelectedItem());
 
-        boolean isComplete = false;
         if(admin.isEmpty() || first.isEmpty() || last.isEmpty() || addressStr.isEmpty() || phoneStr.isEmpty() || incomeStr.isEmpty() || modelStr.isEmpty() || yearStr.isEmpty()){
+            //Check for Empty Fields; if so alert user
             JOptionPane.showMessageDialog(null, "Please complete fields.");
             return;
         }
-        else{
-            isComplete = true;
-        }
-
-        float incomeFloat = 0;
-        boolean isFloat = false;
+        //Parse income
+        float incomeFloat;
         try{
             incomeFloat = Float.parseFloat(incomeStr);
-            isFloat = true;
         }
         catch(Exception e){
+            //throw error if not a number
             JOptionPane.showMessageDialog(null, "Please enter a number.");
             return;
         }
 
-        if(isFloat && isComplete){
-            VehicleInfo newVehicle = new VehicleInfo(modelStr, yearStr, typeStr, methodStr);
-            CustomerProf newCustomer = new CustomerProf(admin, first, last, addressStr, phoneStr, incomeFloat, statusStr, useStr, newVehicle);
-            database.insertNewProfile(newCustomer);
-            database.writeAllCustomerProf();
-
-            JOptionPane.showMessageDialog(null, "Profile Saved.");
-            createProf.dispose(); //Close Window
-        }
+        VehicleInfo newVehicle = new VehicleInfo(modelStr, yearStr, typeStr, methodStr); //Create Vehicle
+        CustomerProf newCustomer = new CustomerProf(admin, first, last, addressStr, phoneStr, incomeFloat, statusStr, useStr, newVehicle); //Create Customer
+        //Insert Profile
+        database.insertNewProfile(newCustomer);
+        //Save to Database
+        database.writeAllCustomerProf();
+        //Alert user
+        JOptionPane.showMessageDialog(null, "Profile Saved.");
+        createProf.dispose(); //Close Window
     }
 }

@@ -1,19 +1,17 @@
-import com.sun.tools.javac.Main;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SuccessfulDelete implements ActionListener {
-    JFrame successfulDelete;
+    JFrame successfulDelete; //Frame
     public SuccessfulDelete(){
-        successfulDelete = new JFrame();
-
+        successfulDelete = new JFrame(); //Set Frame
+        //Create Panel
         JPanel panel = new JPanel();
         JLabel label = new JLabel("Delete Profile");
         panel.add(label);
-
+        //Set layout
         panel.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
         panel.setLayout(new GridLayout(0, 1));
 
@@ -23,10 +21,10 @@ public class SuccessfulDelete implements ActionListener {
         //OK Button
         JButton okButton = new JButton("OK");
         okButton.addActionListener(this);
-
+        //Add panels
         panel.add(deleted);
         panel.add(okButton);
-
+        //set layout
         successfulDelete.add(panel, BorderLayout.CENTER);
         successfulDelete.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         successfulDelete.setTitle("Profile Deleted");
@@ -36,6 +34,6 @@ public class SuccessfulDelete implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        successfulDelete.dispose();
+        successfulDelete.dispose(); //close
     }
 }

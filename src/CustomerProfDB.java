@@ -8,6 +8,7 @@ public class CustomerProfDB {
     private int currentCustomerIndex = 0; //Index of current customer
     private String fileName; //FileName
     ArrayList<CustomerProf> customerList = new ArrayList<>(); //Array of customers
+    public boolean isValidfile = true;
 
     //Database Constructor
     CustomerProfDB(String file){
@@ -102,7 +103,7 @@ public class CustomerProfDB {
             }
         } catch(Exception e){ //Throw Error if error in file format
             System.out.println("Error Reading File: Please User Correct format"); //Print to user
-            e.printStackTrace(); //Print StackTrace
+            isValidfile = false;
         }
 
     }

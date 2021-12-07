@@ -4,13 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class UpdateProf implements ActionListener {
-    JLabel fieldL;
-    JTextField fieldT;
-    CustomerProf customer;
-    String updateField;
-    JFrame updateProf;
-    CustomerProfDB database;
-
+    JLabel fieldL; //Label
+    JTextField fieldT; //Update field
+    CustomerProf customer; //cusomter
+    String updateField; //Field to be updated
+    JFrame updateProf; //frame
+    CustomerProfDB database; //Database
+    //Dropdown Selection
     String[] uses = {"Personal", "Business", "Both"};
     String[] statuses = {"Active", "Inactive"};
     String[] types = {"Sedan", "Sport", "SUV", "Truck", "Other"};
@@ -21,29 +21,29 @@ public class UpdateProf implements ActionListener {
     JComboBox<String> methodT = new JComboBox<>(methods);
 
     public UpdateProf(CustomerProf theCustomer, String field, CustomerProfDB data){
-        database = data;
-        customer = theCustomer;
-        updateField = field;
+        database = data; //Set Database
+        customer = theCustomer; //Set Customer
+        updateField = field; //Set Field
 
-        updateProf = new JFrame();
-
+        updateProf = new JFrame(); //Set Frame
+        //Create Panel
         JPanel panel = new JPanel();
         JLabel label = new JLabel("Update");
         panel.add(label);
-
+        //Set Layout
         panel.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
         panel.setLayout(new GridLayout(0, 1));
-
+        //Add panels
         panel.add(new JLabel("Admin ID - " + customer.getadminID()));
         panel.add(new JLabel("Last Name - " + customer.getLastName()));
-
+        //Create Label
         fieldL = new JLabel("" + field);
         fieldT = new JFormattedTextField();
 
         //Submit Button
         JButton submitButton = new JButton("SUBMIT");
         submitButton.addActionListener(this);
-
+        //Add panel based on selection
         panel.add(fieldL);
         if (updateField.equals("Use")){
             panel.add(useT);
@@ -56,8 +56,8 @@ public class UpdateProf implements ActionListener {
         }else {
             panel.add(fieldT);
         }
-        panel.add(submitButton);
-
+        panel.add(submitButton); //add submit button
+        //Complete Frame
         updateProf.add(panel, BorderLayout.CENTER);
         updateProf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         updateProf.setTitle("Update Profie");
@@ -68,7 +68,7 @@ public class UpdateProf implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         //Configure
         VehicleInfo vehicle = customer.getVehicleInfo();
-
+        //Update Field based upong selection
         if(updateField.equals("First Name")){
             customer.updateFirstName(fieldT.getText());
         }
@@ -103,7 +103,7 @@ public class UpdateProf implements ActionListener {
             vehicle.updateMethod(String.valueOf(methodT.getSelectedItem()));
         }
 
-        database.writeAllCustomerProf();
-        updateProf.dispose();
+        database.writeAllCustomerProf(); //Write
+        updateProf.dispose(); //Close
     }
 }

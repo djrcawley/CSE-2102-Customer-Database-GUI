@@ -4,24 +4,25 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class UpdateProfFinder implements ActionListener {
-    JLabel adminID, lName, update;
-    JTextField adminIDT, lNameT;
-
+    JLabel adminID, lName, update; //Label
+    JTextField adminIDT, lNameT; //Text Field
+    //Fields
     String[] fields = {"First Name", "Last Name", "Address", "Phone", "Income", "Status", "Use", "Model", "Year", "Type", "Method"};
     JComboBox<String> updateT;
 
-    CustomerProfDB database;
-    JFrame updateProf;
+    CustomerProfDB database; //Database
+    JFrame updateProf; //Frame
 
     public UpdateProfFinder(CustomerProfDB data){
-        database = data;
+        database = data; //Set database
 
-        updateProf = new JFrame();
+        updateProf = new JFrame(); //Set Frame
 
+        //Create Panel
         JPanel panel = new JPanel();
         JLabel label = new JLabel("Update Profile");
         panel.add(label);
-
+        //Set layout
         panel.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
         panel.setLayout(new GridLayout(0, 1));
 
@@ -38,7 +39,7 @@ public class UpdateProfFinder implements ActionListener {
         //Find Button
         JButton findButton = new JButton("FIND");
         findButton.addActionListener(this);
-
+        //Add panels
         panel.add(adminID);
         panel.add(adminIDT);
         panel.add(lName);
@@ -46,7 +47,7 @@ public class UpdateProfFinder implements ActionListener {
         panel.add(update);
         panel.add(updateT);
         panel.add(findButton);
-
+        //Complete Frame
         updateProf.add(panel, BorderLayout.CENTER);
         updateProf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         updateProf.setTitle("Update Profile");
@@ -58,11 +59,13 @@ public class UpdateProfFinder implements ActionListener {
         //Search DB for Profile
         CustomerProf customer = database.findProfile(adminIDT.getText(), lNameT.getText());
         if(customer == null){
+            //Cusomter does not exist
             JOptionPane.showMessageDialog(null, "Invalid Customer");
         }
         else {
+            //Call updateProf
             new UpdateProf(customer, (String) updateT.getSelectedItem(), database);
         }
-        updateProf.dispose();
+        updateProf.dispose(); //Close frame
     }
 }
