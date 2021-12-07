@@ -4,15 +4,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class DisplayProf implements ActionListener{
+    //Labels
     JLabel adminID, fName, lName, address, phone, income, use, status, model, year, type, method;
     JLabel adminIDV, fNameV, lNameV, addressV, phoneV, incomeV, useV, statusV, modelV, yearV, typeV, methodV;
-    JFrame fdProf;
+    JFrame fdProf; //Frame
 
     public DisplayProf(CustomerProf customer){
-        VehicleInfo vehicle = customer.getVehicleInfo();
+        VehicleInfo vehicle = customer.getVehicleInfo(); //Get Customer Vehicle
 
-        fdProf = new JFrame();
-
+        fdProf = new JFrame(); //Set frame
+        //Create panel & Label
         JPanel panel = new JPanel();
         JLabel label = new JLabel("Customer Profile", JLabel.CENTER);
         panel.add(label);
@@ -20,7 +21,7 @@ public class DisplayProf implements ActionListener{
         //Filler Label
         JLabel label1 = new JLabel("");
         panel.add(label1);
-
+        //Set layout
         panel.setBorder(BorderFactory.createEmptyBorder(100, 100, 100, 100));
         panel.setLayout(new GridLayout(0, 2));
 
@@ -53,7 +54,7 @@ public class DisplayProf implements ActionListener{
         //Find Button
         JButton closeButton = new JButton("CLOSE");
         closeButton.addActionListener(this);
-
+        //Add panels
         panel.add(adminID);
         panel.add(adminIDV);
         panel.add(fName);
@@ -82,9 +83,9 @@ public class DisplayProf implements ActionListener{
         //Another Filler Label
         JLabel label2 = new JLabel("");
         panel.add(label2);
-
+        //Add close button
         panel.add(closeButton);
-
+        //Complete Frame
         fdProf.add(panel, BorderLayout.CENTER);
         fdProf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         fdProf.setTitle("Customer Profile");
@@ -93,6 +94,6 @@ public class DisplayProf implements ActionListener{
     }
 
     public void actionPerformed(ActionEvent e) {
-        fdProf.dispose();
+        fdProf.dispose(); //Exit on Close button
     }
 }
