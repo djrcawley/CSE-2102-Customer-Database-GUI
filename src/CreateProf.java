@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.regex.*;
 
 public class CreateProf implements ActionListener {
     //Labels
@@ -126,6 +127,12 @@ public class CreateProf implements ActionListener {
             JOptionPane.showMessageDialog(null, "Please enter an income of 0 or greater");
             return;
         }
+        if(!isValidPhone(phoneStr)){
+            //Check is phone number is valid
+            JOptionPane.showMessageDialog(null, "Invalid phone number.");
+            return;
+        }
+
 
         VehicleInfo newVehicle = new VehicleInfo(modelStr, yearStr, typeStr, methodStr); //Create Vehicle
         CustomerProf newCustomer = new CustomerProf(admin, first, last, addressStr, phoneStr, incomeFloat, statusStr, useStr, newVehicle); //Create Customer
@@ -136,5 +143,15 @@ public class CreateProf implements ActionListener {
         //Alert user
         JOptionPane.showMessageDialog(null, "Profile Saved.");
         createProf.dispose(); //Close Window
+    }
+
+    public static boolean isValidPhone(String number)
+    {
+        //Regex String
+        String regex = "(\\+\\d{1,3}\\s?)?((\\(\\d{3}\\)\\s?)|(\\d{3})(\\s|-?))(\\d{3}(\\s|-?))(\\d{4})(\\s?(([E|e]xt[:|.|]?)|x|X)(\\s?\\d+))?";
+        //Credit Regex: https://stackoverflow.com/a/50122731
+        Pattern p = Pattern.compile(regex); //Compiler
+        Matcher m = p.matcher(number); //Match number
+        return m.matches(); //Return validity
     }
 }
