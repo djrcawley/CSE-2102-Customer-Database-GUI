@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Calendar;
 import java.util.regex.*;
 
 public class CreateProf implements ActionListener {
@@ -132,6 +133,12 @@ public class CreateProf implements ActionListener {
             JOptionPane.showMessageDialog(null, "Invalid phone number.");
             return;
         }
+        if(!isValidYear(yearStr)){
+            int currentYear = Calendar.getInstance().get(Calendar.YEAR)+1; //Next model year
+            String message = String.format("Input a valid year (1885-%d)", currentYear); //Format Message
+            JOptionPane.showMessageDialog(null, message); //Display Alert
+            return;
+        }
 
 
         VehicleInfo newVehicle = new VehicleInfo(modelStr, yearStr, typeStr, methodStr); //Create Vehicle
@@ -153,5 +160,17 @@ public class CreateProf implements ActionListener {
         Pattern p = Pattern.compile(regex); //Compiler
         Matcher m = p.matcher(number); //Match number
         return m.matches(); //Return validity
+    }
+    public static boolean isValidYear(String year)
+    {
+        boolean isvalid = false; //Check Validity
+        try{
+            int Year = Integer.parseInt(year); //Parse
+            int currentYear = Calendar.getInstance().get(Calendar.YEAR)+1; //Next model year
+            if(Year >= 1885 && Year <= currentYear){ //Between 1885 and next model year
+                isvalid = true; //set true
+            }
+        }catch(Exception e){}
+        return isvalid;//Return
     }
 }
