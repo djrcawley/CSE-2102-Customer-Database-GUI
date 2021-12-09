@@ -121,7 +121,7 @@ public class CreateProf implements ActionListener {
         }
         catch(Exception e){
             //throw error if not a number
-            JOptionPane.showMessageDialog(null, "Please enter a number.");
+            JOptionPane.showMessageDialog(null, "Please enter income as a number.");
             return;
         }
         if (incomeFloat<0){
